@@ -5,9 +5,11 @@ on:
     types: [opened, edited, closed, reopened]
 
 env:
+  ISSUE_ACTION: ${{ github.event.action }}
   ISSUE_BODY: ${{ github.event.issue.body }}
   ISSUE_NUMBER: ${{ github.event.issue.number }}
   ISSUE_TITLE: ${{ github.event.issue.title }}
+  ISSUE_URL: ${{ github.event.issue.html_url }}
   WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
 
 jobs:      
@@ -31,6 +33,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          echo $ISSUE_BODY
-          echo $ISSUE_NUMBER
-          echo $ISSUE_TITLE
+        curl --silent --location --request POST "$WORKFLOW_URL" \
+        --header 'Accept: application/json' \
+        --header 'Content-Type: text/plain' \
+        --data-raw "{
+            "action": "$ISSUE_ACTION"
+            "body" : "$ISSUE_BODY"
+            "number" : "$ISSUE_NUMBER"
+            "title" : "$ISSUE_TITLE"
+            "url" : "$ISSUE_URL"
+        }"

@@ -7,7 +7,7 @@ on:
 jobs:      
   github:
     name: github
-    if: ${{ github.event_name == "issues" && github.event.action == "edited" }}
+    if: ${{ github.event_name == 'issues' }} && {{ github.event.action == 'edited' }}
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     runs-on: ubuntu-latest

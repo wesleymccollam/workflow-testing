@@ -5,13 +5,20 @@ on:
     types: [opened, edited, closed, reopened]
 
 jobs:      
-  github:
-    name: github
-    if: ${{ github.event_name == 'issues' }} && {{ github.event.action == 'edited' }}
-    env:
-      GITHUB_CONTEXT: ${{ toJson(github) }}
+  issue_created:
+    name: Issue Created
+    if: ${{ github.event_name == 'issues' }} && {{ github.event.action == 'opened' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: |
-          echo "$GITHUB_CONTEXT"
+          echo "Issue was created"
+
+  issue_edited:
+    name: Issue Edited
+    if: ${{ github.event_name == 'issues' }} && {{ github.event.action == 'edited' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo "Issue was edited"

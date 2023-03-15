@@ -4,14 +4,15 @@ on:
   issues:
     types: [opened, edited, closed, reopened]
 
+env:
+  ISSUE_BODY: ${{ github.event.issue.body }}
+  ISSUE_NUMBER: ${{ github.event.issue.number }}
+  ISSUE_TITLE: ${{ github.event.issue.title }}
+  WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
+
 jobs:      
   issue_created:
     name: Issue Created
-    env:
-      ISSUE_BODY: ${{ github.event.issue.body }}
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
-      ISSUE_TITLE: ${{ github.event.issue.title }}
-      WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
     if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
     runs-on: ubuntu-latest
     steps:

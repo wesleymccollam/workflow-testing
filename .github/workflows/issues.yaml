@@ -33,13 +33,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-        curl --silent --location --request POST "$WORKFLOW_URL" \
-        --header 'Accept: application/json' \
-        --header 'Content-Type: text/plain' \
-        --data-raw "{
-            "action": "$ISSUE_ACTION"
-            "body" : "$ISSUE_BODY"
-            "number" : "$ISSUE_NUMBER"
-            "title" : "$ISSUE_TITLE"
-            "url" : "$ISSUE_URL"
-        }"
+          curl --silent --location --request POST "$WORKFLOW_URL" \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: text/plain' \
+          --data-raw "{
+              "action": "$ISSUE_ACTION"
+              "body" : "$ISSUE_BODY"
+              "number" : "$ISSUE_NUMBER"
+              "title" : "$ISSUE_TITLE"
+              "url" : "$ISSUE_URL"
+          }"

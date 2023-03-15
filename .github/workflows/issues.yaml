@@ -26,8 +26,6 @@ jobs:
           
   issue_edited:
     name: Issue Edited
-    env:
-      WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
     if: ${{ github.event_name == 'issues'}}
     runs-on: ubuntu-latest
     steps:

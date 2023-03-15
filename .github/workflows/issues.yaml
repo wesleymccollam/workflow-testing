@@ -5,11 +5,6 @@ on:
     types: [opened, edited, closed, reopened]
 
 env:
-  ISSUE_ACTION: ${{ github.event.action }}
-  ISSUE_BODY: ${{ github.event.issue.body }}
-  ISSUE_NUMBER: ${{ github.event.issue.number }}
-  ISSUE_TITLE: ${{ github.event.issue.title }}
-  ISSUE_URL: ${{ github.event.issue.html_url }}
   WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
 
 jobs:      
@@ -36,9 +31,9 @@ jobs:
           --header 'Accept: application/json' \
           --header 'Content-Type: text/plain' \
           --data-raw "{
-              "action": "$ISSUE_ACTION"
-              "body" : "$ISSUE_BODY"
-              "number" : "$ISSUE_NUMBER"
-              "title" : "$ISSUE_TITLE"
-              "url" : "$ISSUE_URL"
+              "action": "${{ github.event.action }}"
+              "body" : "${{ github.event.issue.body }}"
+              "number" : "${{ github.event.issue.number }}"
+              "title" : "${{ github.event.issue.title }}"
+              "url" : "${{ github.event.issue.html_url }}"
           }"

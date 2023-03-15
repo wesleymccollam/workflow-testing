@@ -5,15 +5,19 @@ on:
     types: [opened, edited, closed, reopened]
 
 jobs:
-  issue_creation:
-    name: Issue Created
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-        echo ${{github.event}}
-        echo ${{github.event_path}}
-        echo ${{github.ref}}
+  - name: Dump GitHub context
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    run: echo "$GITHUB_CONTEXT"
+  # issue_creation:
+  #   name: Issue Created
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: |
+  #       echo ${{github.event}}
+  #       echo ${{github.event_path}}
+  #       echo ${{github.ref}}
 
   # issue_updated:
   #   name: Issue Updated

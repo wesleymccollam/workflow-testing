@@ -22,6 +22,10 @@ jobs:
 
   issue_edited:
     name: Issue Edited
+    env:
+      ISSUE_BODY: ${{ github.event.issue.body }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      ISSUE_TITLE: ${{ github.event.issue.title }}
     if: ${{ github.event_name == 'issues' && github.event.action == 'edited' }}
     runs-on: ubuntu-latest
     steps:

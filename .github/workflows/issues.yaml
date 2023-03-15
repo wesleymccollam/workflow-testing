@@ -9,16 +9,6 @@ env:
      
 
 jobs:       
-  github:
-    name: github
-    if: ${{ github.event_name == 'issues' && github.event.action == 'edited' }}
-    env:
-      GITHUB_CONTEXT: ${{ toJson(github) }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-          echo "$GITHUB_CONTEXT"
   issue_created:
     name: Issue Created
     if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
@@ -32,7 +22,7 @@ jobs:
           --header 'Content-Type: text/plain' \
           --data-raw '{
               "action": "${{ github.event.action }}",
-              "description": "${{ github.event.action.issue.description }}",
+              "description": "${{ github.event.action.issue.body }}",
               "number" : "${{ github.event.issue.number }}",
               "title" : "${{ github.event.issue.title }}",
               "url" : "${{ github.event.issue.html_url }}"

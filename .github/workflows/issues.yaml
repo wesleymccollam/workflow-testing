@@ -11,6 +11,7 @@ jobs:
       ISSUE_BODY: ${{ github.event.issue.body }}
       ISSUE_NUMBER: ${{ github.event.issue.number }}
       ISSUE_TITLE: ${{ github.event.issue.title }}
+      WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
     if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
     runs-on: ubuntu-latest
     steps:
@@ -19,14 +20,12 @@ jobs:
           echo $ISSUE_BODY
           echo $ISSUE_NUMBER
           echo $ISSUE_TITLE
-
+          
   issue_edited:
     name: Issue Edited
     env:
-      ISSUE_BODY: ${{ github.event.issue.body }}
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
-      ISSUE_TITLE: ${{ github.event.issue.title }}
-    if: ${{ github.event_name == 'issues' && github.event.action == 'edited' }}
+      WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
+    if: ${{ github.event_name == 'issues'}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

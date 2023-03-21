@@ -6,11 +6,11 @@ on:
 
 env:
   WORKFLOW_URL: ${{ secrets.WORKFLOW_URL }}
-  ACTION: ${{ github.event.action }}
-  DESCRIPTION: ${{ github.event.issue.body }}
-  NUMBER : ${{ github.event.issue.number }}
-  TITLE : ${{ github.event.issue.title }}
-  URL : ${{ github.event.issue.html_url }}
+  ACTION: "${{ github.event.action }}"
+  DESCRIPTION: "${{ github.event.issue.body }}"
+  NUMBER : "${{ github.event.issue.number }}"
+  TITLE : "${{ github.event.issue.title }}"
+  URL : "${{ github.event.issue.html_url }}"
      
 jobs:       
   issue_created:
@@ -25,9 +25,9 @@ jobs:
           --header 'Accept: application/json' \
           --header 'Content-Type: text/plain' \
           --data-raw "{
-              "action": "'"$ACTION"'",
-              "description": "'"$DESCRIPTION"'",
-              "number" : "'"$NUMBER"'",
-              "title" : "'"$TITLE"'",
-              "url" : "'"$URL"'"
+              "action": "$ACTION",
+              "description": "$DESCRIPTION",
+              "number" : "$NUMBER",
+              "title" : "$TITLE",
+              "url" : "$URL"
           }"
